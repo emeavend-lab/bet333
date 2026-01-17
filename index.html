@@ -76,24 +76,24 @@
 
   const vibes = [
     { img: "1.png", text: "Este momento eres tú 💕" },
-    { img: "2.png", text: "Y aquí mi corazón contigo" }
+    { img: "2.png", text: "Y aquí mi corazón contigo 💖" }
   ];
 
   const phraseEl = document.getElementById("phrase");
   const imageEl = document.getElementById("vibeImage");
 
-  let showing = "text";
   let phraseIndex = 0;
   let imageIndex = 0;
+  let phraseCount = 0; // cuántas frases han salido desde la última imagen
+  let showing = "text";
 
   imageEl.style.display = "none";
 
   function changeVibe() {
-    if (showing === "text") {
-      // ocultar texto
+    // Si toca mostrar imagen (cada 3 frases)
+    if (phraseCount === 3) {
       phraseEl.style.display = "none";
 
-      // mostrar imagen + texto
       imageEl.src = vibes[imageIndex].img;
       phraseEl.textContent = vibes[imageIndex].text;
 
@@ -101,17 +101,20 @@
       phraseEl.style.display = "block";
 
       imageIndex = (imageIndex + 1) % vibes.length;
+      phraseCount = 0;
       showing = "image";
-    } else {
-      // ocultar imagen
-      imageEl.style.display = "none";
-
-      // mostrar frase en orden
-      phraseEl.textContent = phrases[phraseIndex];
-      phraseEl.style.display = "block";
-
-      phraseIndex = (phraseIndex + 1) % phrases.length;
-      showing = "text";
+      return;
     }
+
+    // Mostrar frases normalmente
+    imageEl.style.display = "none";
+
+    phraseEl.textContent = phrases[phraseIndex];
+    phraseEl.style.display = "block";
+
+    phraseIndex = (phraseIndex + 1) % phrases.length;
+    phraseCount++;
+    showing = "text";
   }
 </script>
+

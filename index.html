@@ -58,6 +58,24 @@
       opacity: 0.6;
       font-size: 0.8rem;
     }
+    
+    #hint {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  opacity: 0.4;
+  animation: blink 2.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
   </style>
 </head>
 
@@ -66,6 +84,7 @@
   <div class="container">
     <img id="vibeImage" src="1.jpeg" alt="vibe image" />
     <h1 id="phrase">TE AMO DEMASIADO</h1>
+    <p id="hint">Haz clic para continuar</p>
   </div>
 
   <!-- 🔊 Sonido de clic -->
@@ -106,6 +125,12 @@
     clickSound.volume = 0.3;
 
     function changeVibe() {
+      // clic para seguir
+      if (!hasClicked) {
+  hintEl.style.display = "none";
+  hasClicked = true;
+}
+
       // 🔊 sonido en cada clic
       clickSound.currentTime = 0;
       clickSound.play();

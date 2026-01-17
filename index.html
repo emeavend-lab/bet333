@@ -30,7 +30,6 @@
   color: #250917;
   cursor: pointer;
   padding: 20px;
-  <img src="ardilla.png" id="squirrel">
 
 }
 
@@ -136,32 +135,6 @@
   opacity: 0;
 }
 
-#squirrel.walk {
-  opacity: 1;
-  animation:
-    moveLeft 6s linear forwards,
-    hop 0.6s ease-in-out infinite;
-}
-
-/* Se mueve hacia la izquierda */
-@keyframes moveLeft {
-  from {
-    right: -200px;
-  }
-  to {
-    right: 60%;
-  }
-}
-
-/* Saltito */
-@keyframes hop {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-14px);
-  }
-}
 
   }
 </script>

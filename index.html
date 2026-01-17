@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   <link rel="icon" type="image/png" href="1.png">
+  <link rel="icon" type="image/png" href="1.png">
   <title>BE♡</title>
 
   <style>
@@ -11,28 +11,24 @@
       box-sizing: border-box;
     }
 
-   body {
-  margin: 0;
-  min-height: 100vh;
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        linear-gradient(rgba(245, 184, 215, 0.6), rgba(245, 184, 215, 0.6)),
+        url("2.jpeg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
 
-  background:
-    linear-gradient(rgba(245, 184, 215, 0.6), rgba(245, 184, 215, 0.6)),
-    url("2.jpeg");
-
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "Tahoma";
-  color: #250917;
-  cursor: pointer;
-  padding: 20px;
-
-}
-
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Tahoma";
+      color: #250917;
+      cursor: pointer;
+      padding: 20px;
+    }
 
     .container {
       text-align: center;
@@ -66,68 +62,79 @@
 </head>
 
 <body onclick="changeVibe()">
+
   <div class="container">
-  <img id="vibeImage" src="1.jpeg" alt="vibe image" />
-  <h1 id="phrase">TE AMO DEMASIADO </h1>
-</div>
+    <img id="vibeImage" src="1.jpeg" alt="vibe image" />
+    <h1 id="phrase">TE AMO DEMASIADO</h1>
+  </div>
 
+  <!-- 🔊 Sonido de clic -->
+  <audio id="clickSound">
+    <source src="skipp.mp3" type="audio/mpeg">
+  </audio>
 
-<script>
-  const phrases = [
-    "Desde que te conocí empecé a creer en la verdadera suerte",
-    "Y desde el principio me has hecho tan feliz",
-    "He valorado todo el tiempo a tu lado",
-    "Porque eres mi persona favorita",
-    "Probablemente no sea el tiempo indicado",
-    "Ni la persona indicada",
-    "Pero quiero decirte que...",
-    "Te amo como nunca lo había hecho, soy tan feliz a tu lado, y la única persona que genuinamente me interesa eres tú",
-    "Eres la chica de mis sueños",
-    "Te encontré a ti, alguien maravillosa, alguien espléndida, alguien simplemente única, alguien perfecta a su manera",
-    "eres tan hermosa, tan genuina, tan diferente a todo, que cada cosa nueva de ti es una experiencia increible que siempre amaré descubrir"
-    "me tienes tan encantado con tu forma de ser"
-  ];
+  <script>
+    const phrases = [
+      "Desde que te conocí empecé a creer en la verdadera suerte",
+      "Y desde el principio me has hecho tan feliz",
+      "He valorado todo el tiempo a tu lado",
+      "Porque eres mi persona favorita",
+      "Probablemente no sea el tiempo indicado",
+      "Ni la persona indicada",
+      "Pero quiero decirte que...",
+      "Te amo como nunca lo había hecho, soy tan feliz a tu lado, y la única persona que genuinamente me interesa eres tú",
+      "Eres la chica de mis sueños",
+      "Te encontré a ti, alguien maravillosa, alguien espléndida, alguien simplemente única, alguien perfecta a su manera",
+      "Eres tan hermosa, tan genuina, tan diferente a todo, que cada cosa nueva de ti es una experiencia increíble que siempre amaré descubrir",
+      "Me tienes tan encantado con tu forma de ser"
+    ];
 
-  const vibes = [
-    { img: "1.png", text: "Amo pasar el tiempo a tu lado 💕" },
-    { img: "2.png", text: "Eres mi inspiración, mi musa 💖" }
-  ];
+    const vibes = [
+      { img: "1.png", text: "Amo pasar el tiempo a tu lado 💕" },
+      { img: "2.png", text: "Eres mi inspiración, mi musa 💖" }
+    ];
 
-  const phraseEl = document.getElementById("phrase");
-  const imageEl = document.getElementById("vibeImage");
+    const phraseEl = document.getElementById("phrase");
+    const imageEl = document.getElementById("vibeImage");
+    const clickSound = document.getElementById("clickSound");
 
-  let phraseIndex = 0;
-  let imageIndex = 0;
-  let phraseCount = 0; // cuántas frases han salido desde la última imagen
-  let showing = "text";
+    let phraseIndex = 0;
+    let imageIndex = 0;
+    let phraseCount = 0;
 
-  imageEl.style.display = "none";
+    imageEl.style.display = "none";
+    clickSound.volume = 0.5;
 
-  function changeVibe() {
-    // Si toca mostrar imagen (cada 3 frases)
-    if (phraseCount === 4) {
-      phraseEl.style.display = "none";
+    function changeVibe() {
+      // 🔊 sonido en cada clic
+      clickSound.currentTime = 0;
+      clickSound.play();
 
-      imageEl.src = vibes[imageIndex].img;
-      phraseEl.textContent = vibes[imageIndex].text;
+      // Cada 4 frases → imagen
+      if (phraseCount === 4) {
+        phraseEl.style.display = "none";
 
-      imageEl.style.display = "block";
+        imageEl.src = vibes[imageIndex].img;
+        phraseEl.textContent = vibes[imageIndex].text;
+
+        imageEl.style.display = "block";
+        phraseEl.style.display = "block";
+
+        imageIndex = (imageIndex + 1) % vibes.length;
+        phraseCount = 0;
+        return;
+      }
+
+      // Mostrar frases
+      imageEl.style.display = "none";
+
+      phraseEl.textContent = phrases[phraseIndex];
       phraseEl.style.display = "block";
 
-      imageIndex = (imageIndex + 1) % vibes.length;
-      phraseCount = 0;
-      showing = "image";
-      return;
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+      phraseCount++;
     }
+  </script>
 
-    // Mostrar frases normalmente
-    imageEl.style.display = "none";
-
-    phraseEl.textContent = phrases[phraseIndex];
-    phraseEl.style.display = "block";
-
-    phraseIndex = (phraseIndex + 1) % phrases.length;
-    phraseCount++;
-    showing = "text";
-  }
-</script>
+</body>
+</html>

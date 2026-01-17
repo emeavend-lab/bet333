@@ -131,11 +131,14 @@
   const imageEl = document.getElementById("vibeImage");
   const clickSound = document.getElementById("clickSound");
   const hintEl = document.getElementById("hint");
+  const finalPhrase = "TE AMO, TE AMO, TE AMO, TE AMO, TE AMO, TE AMO, TE AMO, TE AMO, TE AMO, TE AMO, TE AMO, TE AMO, TE AMO, TE AMO, TE AMO, TE AMO, TE AMO, TE AMO, TE AMO, TE AMO, TE AMO, TE AMO, TE AMO";
 
   let hasClicked = false;
   let phraseIndex = 0;
   let imageIndex = 0;
   let phraseCount = 0;
+  let finalShown = false;
+
 
   imageEl.style.display = "none";
   clickSound.volume = 0.4;
@@ -151,10 +154,13 @@
   clickSound.currentTime = 0;
   clickSound.play();
 
-  // 👉 SI TODAS LAS FRASES YA SE MOSTRARON
+  // 👉 CUANDO YA NO HAY FRASES
   if (phraseIndex >= phrases.length) {
+
+    // 👉 TODAVÍA HAY IMÁGENES
     if (imageIndex < vibes.length) {
       phraseEl.style.display = "none";
+
       imageEl.src = vibes[imageIndex].img;
       phraseEl.textContent = vibes[imageIndex].text;
 
@@ -162,7 +168,21 @@
       phraseEl.style.display = "block";
 
       imageIndex++;
+      return;
     }
+
+    // 👉 FRASE FINAL (SOLO UNA VEZ)
+    if (!finalShown) {
+      imageEl.style.display = "none";
+
+      phraseEl.textContent = finalPhrase;
+      phraseEl.style.fontSize = "clamp(2.6rem, 6vw, 3.2rem)";
+      phraseEl.style.opacity = "0.9";
+
+      phraseEl.style.display = "block";
+      finalShown = true;
+    }
+
     return;
   }
 
@@ -189,6 +209,7 @@
   phraseIndex++;
   phraseCount++;
 }
+
 
 </script>
 

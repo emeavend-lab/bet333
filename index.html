@@ -75,17 +75,22 @@
 <script>
   const phrases = [
     "Desde que te conocí empecé a creer en la verdadera suerte",
-    "Te amo tanto de principio a fin",
-    "He adorado tanto el tiempo que pasamos juntos",
-    "omaigat",
+    "Y desde el principio me has hecho tan feliz",
+    "He valorado todo el tiempo a tu lado",
+    "Porque eres mi persona favorita",
+    "Probablemente no sea el tiempo indicado",
+    "Ni la persona indicada",
+    "Pero quiero decirte que...",
+    "Te amo como nunca lo había hecho, soy tan feliz a tu lado, y la única persona que genuinamente me interesa eres tú",
     "Eres la chica de mis sueños",
     "Te encontré a ti, alguien maravillosa, alguien espléndida, alguien simplemente única, alguien perfecta a su manera",
-    "Dentro de un campo lleno de flores tú eres la flor más hermosa de todas"
+    "eres tan hermosa, tan genuina, tan diferente a todo, que cada cosa nueva de ti es una experiencia increible que siempre amaré descubrir"
+    "me tienes tan encantado con tu forma de ser"
   ];
 
   const vibes = [
-    { img: "1.png", text: "Este momento eres tú 💕" },
-    { img: "2.png", text: "Y aquí mi corazón contigo 💖" }
+    { img: "1.png", text: "Amo pasar el tiempo a tu lado 💕" },
+    { img: "2.png", text: "Eres mi inspiración, mi musa 💖" }
   ];
 
   const phraseEl = document.getElementById("phrase");
@@ -100,7 +105,7 @@
 
   function changeVibe() {
     // Si toca mostrar imagen (cada 3 frases)
-    if (phraseCount === 3) {
+    if (phraseCount === 4) {
       phraseEl.style.display = "none";
 
       imageEl.src = vibes[imageIndex].img;

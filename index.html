@@ -136,40 +136,55 @@
   clickSound.volume = 0.4;
 
   function changeVibe() {
-    // ocultar el hint solo la primera vez
-    if (!hasClicked) {
-      hintEl.style.display = "none";
-      hasClicked = true;
-    }
+  // ocultar el hint solo la primera vez
+  if (!hasClicked) {
+    hintEl.style.display = "none";
+    hasClicked = true;
+  }
 
-    // 🔊 sonido en cada clic
-    clickSound.currentTime = 0;
-    clickSound.play();
+  // 🔊 sonido
+  clickSound.currentTime = 0;
+  clickSound.play();
 
-    // Cada 4 frases → imagen
-    if (phraseCount === 4) {
+  // 👉 SI TODAS LAS FRASES YA SE MOSTRARON
+  if (phraseIndex >= phrases.length) {
+    if (imageIndex < vibes.length) {
       phraseEl.style.display = "none";
-
       imageEl.src = vibes[imageIndex].img;
       phraseEl.textContent = vibes[imageIndex].text;
 
       imageEl.style.display = "block";
       phraseEl.style.display = "block";
 
-      imageIndex = (imageIndex + 1) % vibes.length;
-      phraseCount = 0;
-      return;
+      imageIndex++;
     }
+    return;
+  }
 
-    // Mostrar frases
-    imageEl.style.display = "none";
+  // 👉 CADA 4 FRASES → IMAGEN
+  if (phraseCount === 4 && imageIndex < vibes.length) {
+    phraseEl.style.display = "none";
 
-    phraseEl.textContent = phrases[phraseIndex];
+    imageEl.src = vibes[imageIndex].img;
+    phraseEl.textContent = vibes[imageIndex].text;
+
+    imageEl.style.display = "block";
     phraseEl.style.display = "block";
 
-    phraseIndex = (phraseIndex + 1) % phrases.length;
-    phraseCount++;
+    imageIndex++;
+    phraseCount = 0;
+    return;
   }
+
+  // 👉 MOSTRAR FRASE NORMAL
+  imageEl.style.display = "none";
+  phraseEl.textContent = phrases[phraseIndex];
+  phraseEl.style.display = "block";
+
+  phraseIndex++;
+  phraseCount++;
+}
+
 </script>
 
 </body>

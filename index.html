@@ -70,46 +70,48 @@
     "He adorado tanto el tiempo que pasamos juntos",
     "omaigat",
     "Eres la chica de mis sueños",
-    "Te econtré a ti, alguien maravillosa, alguien espléndida, alguien simplemente única, alguien perfecta a su manera",
+    "Te encontré a ti, alguien maravillosa, alguien espléndida, alguien simplemente única, alguien perfecta a su manera",
     "Dentro de un campo lleno de flores tú eres la flor más hermosa de todas"
   ];
 
-  const images = [
-    "1.png",
-    "1.png"
-
+  const vibes = [
+    { img: "1.png", text: "Este momento eres tú 💕" },
+    { img: "2.png", text: "Y aquí mi corazón contigo" }
   ];
 
   const phraseEl = document.getElementById("phrase");
   const imageEl = document.getElementById("vibeImage");
 
-  // ESTADO INICIAL ESTÁ MOSTRANDO EL TEXTO
   let showing = "text";
+  let phraseIndex = 0;
+  let imageIndex = 0;
+
   imageEl.style.display = "none";
 
   function changeVibe() {
     if (showing === "text") {
-      // ocultar el texto
+      // ocultar texto
       phraseEl.style.display = "none";
 
-      // mostrar imagen
-      imageEl.src = images[Math.floor(Math.random() * images.length)];
-      imageEl.style.display = "block";
+      // mostrar imagen + texto
+      imageEl.src = vibes[imageIndex].img;
+      phraseEl.textContent = vibes[imageIndex].text;
 
+      imageEl.style.display = "block";
+      phraseEl.style.display = "block";
+
+      imageIndex = (imageIndex + 1) % vibes.length;
       showing = "image";
     } else {
       // ocultar imagen
       imageEl.style.display = "none";
 
-      // mostrar texto
-      phraseEl.textContent =
-        phrases[Math.floor(Math.random() * phrases.length)];
+      // mostrar frase en orden
+      phraseEl.textContent = phrases[phraseIndex];
       phraseEl.style.display = "block";
 
+      phraseIndex = (phraseIndex + 1) % phrases.length;
       showing = "text";
     }
   }
 </script>
-
-</body>
-</html>

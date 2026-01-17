@@ -93,73 +93,75 @@
   </audio>
 
   <script>
-    const phrases = [
-      "Desde que te conocí empecé a creer en la verdadera suerte",
-      "Y desde el principio me has hecho tan feliz",
-      "He valorado todo el tiempo a tu lado",
-      "Porque eres mi persona favorita",
-      "Probablemente no sea el tiempo indicado",
-      "Ni la persona indicada",
-      "Pero quiero decirte que...",
-      "Te amo como nunca lo había hecho, soy tan feliz a tu lado, y la única persona que genuinamente me interesa eres tú",
-      "Eres la chica de mis sueños",
-      "Te encontré a ti, alguien maravillosa, alguien espléndida, alguien simplemente única, alguien perfecta a su manera",
-      "Eres tan hermosa, tan genuina, tan diferente a todo, que cada cosa nueva de ti es una experiencia increíble que siempre amaré descubrir",
-      "Me tienes tan encantado con tu forma de ser"
-    ];
+  const phrases = [
+    "Desde que te conocí empecé a creer en la verdadera suerte",
+    "Y desde el principio me has hecho tan feliz",
+    "He valorado todo el tiempo a tu lado",
+    "Porque eres mi persona favorita",
+    "Probablemente no sea el tiempo indicado",
+    "Ni la persona indicada",
+    "Pero quiero decirte que...",
+    "Te amo como nunca lo había hecho, soy tan feliz a tu lado, y la única persona que genuinamente me interesa eres tú",
+    "Eres la chica de mis sueños",
+    "Te encontré a ti, alguien maravillosa, alguien espléndida, alguien simplemente única, alguien perfecta a su manera",
+    "Eres tan hermosa, tan genuina, tan diferente a todo, que cada cosa nueva de ti es una experiencia increíble que siempre amaré descubrir",
+    "Me tienes tan encantado con tu forma de ser"
+  ];
 
-    const vibes = [
-      { img: "1.png", text: "Amo pasar el tiempo a tu lado 💕" },
-      { img: "2.png", text: "Eres mi inspiración, mi musa 💖" }
-    ];
+  const vibes = [
+    { img: "1.png", text: "Amo pasar el tiempo a tu lado 💕" },
+    { img: "2.png", text: "Eres mi inspiración, mi musa 💖" }
+  ];
 
-    const phraseEl = document.getElementById("phrase");
-    const imageEl = document.getElementById("vibeImage");
-    const clickSound = document.getElementById("clickSound");
+  const phraseEl = document.getElementById("phrase");
+  const imageEl = document.getElementById("vibeImage");
+  const clickSound = document.getElementById("clickSound");
+  const hintEl = document.getElementById("hint");
 
-    let phraseIndex = 0;
-    let imageIndex = 0;
-    let phraseCount = 0;
+  let hasClicked = false;
+  let phraseIndex = 0;
+  let imageIndex = 0;
+  let phraseCount = 0;
 
-    imageEl.style.display = "none";
-    clickSound.volume = 0.3;
+  imageEl.style.display = "none";
+  clickSound.volume = 0.3;
 
-    function changeVibe() {
-      // clic para seguir
-      if (!hasClicked) {
-  hintEl.style.display = "none";
-  hasClicked = true;
-}
+  function changeVibe() {
+    // ocultar el hint solo la primera vez
+    if (!hasClicked) {
+      hintEl.style.display = "none";
+      hasClicked = true;
+    }
 
-      // 🔊 sonido en cada clic
-      clickSound.currentTime = 0;
-      clickSound.play();
+    // 🔊 sonido en cada clic
+    clickSound.currentTime = 0;
+    clickSound.play();
 
-      // Cada 4 frases → imagen
-      if (phraseCount === 4) {
-        phraseEl.style.display = "none";
+    // Cada 4 frases → imagen
+    if (phraseCount === 4) {
+      phraseEl.style.display = "none";
 
-        imageEl.src = vibes[imageIndex].img;
-        phraseEl.textContent = vibes[imageIndex].text;
+      imageEl.src = vibes[imageIndex].img;
+      phraseEl.textContent = vibes[imageIndex].text;
 
-        imageEl.style.display = "block";
-        phraseEl.style.display = "block";
-
-        imageIndex = (imageIndex + 1) % vibes.length;
-        phraseCount = 0;
-        return;
-      }
-
-      // Mostrar frases
-      imageEl.style.display = "none";
-
-      phraseEl.textContent = phrases[phraseIndex];
+      imageEl.style.display = "block";
       phraseEl.style.display = "block";
 
-      phraseIndex = (phraseIndex + 1) % phrases.length;
-      phraseCount++;
+      imageIndex = (imageIndex + 1) % vibes.length;
+      phraseCount = 0;
+      return;
     }
-  </script>
+
+    // Mostrar frases
+    imageEl.style.display = "none";
+
+    phraseEl.textContent = phrases[phraseIndex];
+    phraseEl.style.display = "block";
+
+    phraseIndex = (phraseIndex + 1) % phrases.length;
+    phraseCount++;
+  }
+</script>
 
 </body>
 </html>

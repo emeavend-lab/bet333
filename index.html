@@ -5,9 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/png" href="1.png">
   <title>BE♡</title>
+
+  <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Birthstone&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Birthstone&display=swap" rel="stylesheet">
 
   <style>
     * {
@@ -18,16 +20,22 @@
       margin: 0;
       min-height: 100vh;
       background:
-        linear-gradient(rgba(245, 184, 215, 0.6), rgba(245, 184, 215, 0.6)),
+        linear-gradient(
+          to bottom,
+          rgba(245, 184, 215, 0.7) 0%,
+          rgba(245, 184, 215, 0.4) 15%,
+          rgba(245, 184, 215, 0.15) 25%,
+          rgba(245, 184, 215, 0) 35%
+        ),
         url("2.jpeg");
       background-size: cover;
       background-position: center;
-      background-repeat: no-repeat;}
+      background-repeat: no-repeat;
 
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: "Birthstone", sans-serif;
+      font-family: "Birthstone", cursive;
       color: #250917;
       cursor: pointer;
       padding: 20px;
@@ -50,35 +58,24 @@
       margin-bottom: 18px;
     }
 
-   h1 {
-  font-size: clamp(2rem, 4vw, 2.5rem);
-  line-height: 1.5;
-  margin: 0;
-}
-
-
-    p {
-      margin-top: 10px;
-      opacity: 0.6;
-      font-size: 0.8rem;
+    h1 {
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      line-height: 1.4;
+      margin: 0;
     }
-    
- #hint {
-  font-size: clamp(1.2rem, 3vw, 1.7rem);
-  opacity: 0.4;
-  animation: blink 2.5s ease-in-out infinite;
-  pointer-events: none;
-}
 
-@keyframes blink {
-  0%, 100% {
-    opacity: 0.3;
-  }
-  50% {
-    opacity: 0.6;
-  }
-}
+    #hint {
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      opacity: 0.4;
+      animation: blink 2.5s ease-in-out infinite;
+      pointer-events: none;
+      margin-top: 12px;
+    }
 
+    @keyframes blink {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.6; }
+    }
   </style>
 </head>
 
@@ -87,87 +84,75 @@
   <div class="container">
     <img id="vibeImage" src="1.jpeg" alt="vibe image" />
     <h1 id="phrase">TE AMO DEMASIADO BETZY ♡</h1>
-    <p id="hint">❤Haz clic para continuar❤</p>
+    <p id="hint">❤ Haz clic para continuar ❤</p>
   </div>
 
-  <!-- 🔊 Sonido de clic -->
-  <audio id="clickSound">
-    <source src="skipp.mp3" type="audio/mpeg">
-  </audio>
+  <!-- 🔊 Sonido -->
+  <audio id="clickSound" src="skipp.mp3"></audio>
 
   <script>
-  const phrases = [
-    "Desde que te conocí empecé a creer en la verdadera suerte",
-    "Y desde el principio me has hecho tan feliz",
-    "He valorado todo el tiempo a tu lado",
-    "Porque eres mi persona favorita",
-    "Probablemente no sea el tiempo indicado",
-    "Ni la persona indicada",
-    "Pero quiero decirte que...",
-    "Te amo como nunca lo había hecho, soy tan feliz a tu lado, y la única persona que genuinamente me interesa eres tú",
-    "Eres la chica de mis sueños",
-    "Te encontré a ti, alguien maravillosa, alguien espléndida, alguien simplemente única, alguien perfecta a su manera",
-    "Eres tan hermosa, tan genuina, tan diferente a todo, que cada cosa nueva de ti es una experiencia increíble que siempre amaré descubrir",
-    "Me tienes tan encantado con tu forma de ser",
-    "dentro de este jardín tan hermoso, tú eres la flor que más resalta",
-    "tú eres la flor que más llama mi atención y la que siempre querré cuidar"
-  
-  ];
+    const phrases = [
+      "Desde que te conocí empecé a creer en la verdadera suerte",
+      "Y desde el principio me has hecho tan feliz",
+      "He valorado todo el tiempo a tu lado",
+      "Porque eres mi persona favorita",
+      "Probablemente no sea el tiempo indicado",
+      "Ni la persona indicada",
+      "Pero quiero decirte que...",
+      "Te amo como nunca lo había hecho, soy tan feliz a tu lado, y la única persona que genuinamente me interesa eres tú",
+      "Eres la chica de mis sueños",
+      "Te encontré a ti, alguien maravillosa, alguien espléndida, alguien simplemente única, alguien perfecta a su manera",
+      "Eres tan hermosa, tan genuina, tan diferente a todo, que cada cosa nueva de ti es una experiencia increíble que siempre amaré descubrir",
+      "Me tienes tan encantado con tu forma de ser",
+      "Dentro de este jardín tan hermoso, tú eres la flor que más resalta",
+      "Tú eres la flor que más llama mi atención y la que siempre querré cuidar"
+    ];
 
-  const vibes = [
-    { img: "1.png", text: "Amo pasar el tiempo a tu lado 💕" },
-    { img: "2.png", text: "Eres mi inspiración, mi musa 💖" }
-  ];
+    const vibes = [
+      { img: "1.png", text: "Amo pasar el tiempo a tu lado 💕" },
+      { img: "2.png", text: "Eres mi inspiración, mi musa 💖" }
+    ];
 
-  const phraseEl = document.getElementById("phrase");
-  const imageEl = document.getElementById("vibeImage");
-  const clickSound = document.getElementById("clickSound");
-  const hintEl = document.getElementById("hint");
+    const phraseEl = document.getElementById("phrase");
+    const imageEl = document.getElementById("vibeImage");
+    const clickSound = document.getElementById("clickSound");
+    const hintEl = document.getElementById("hint");
 
-  let hasClicked = false;
-  let phraseIndex = 0;
-  let imageIndex = 0;
-  let phraseCount = 0;
+    let hasClicked = false;
+    let phraseIndex = 0;
+    let imageIndex = 0;
+    let phraseCount = 0;
 
-  imageEl.style.display = "none";
-  clickSound.volume = 0.4;
-
-  function changeVibe() {
-    // ocultar el hint solo la primera vez
-    if (!hasClicked) {
-      hintEl.style.display = "none";
-      hasClicked = true;
-    }
-
-    // 🔊 sonido en cada clic
-    clickSound.currentTime = 0;
-    clickSound.play();
-
-    // Cada 4 frases → imagen
-    if (phraseCount === 4) {
-      phraseEl.style.display = "none";
-
-      imageEl.src = vibes[imageIndex].img;
-      phraseEl.textContent = vibes[imageIndex].text;
-
-      imageEl.style.display = "block";
-      phraseEl.style.display = "block";
-
-      imageIndex = (imageIndex + 1) % vibes.length;
-      phraseCount = 0;
-      return;
-    }
-
-    // Mostrar frases
     imageEl.style.display = "none";
+    clickSound.volume = 0.4;
 
-    phraseEl.textContent = phrases[phraseIndex];
-    phraseEl.style.display = "block";
+    function changeVibe() {
+      if (!hasClicked) {
+        hintEl.style.display = "none";
+        hasClicked = true;
+      }
 
-    phraseIndex = (phraseIndex + 1) % phrases.length;
-    phraseCount++;
-  }
-</script>
+      clickSound.currentTime = 0;
+      clickSound.play();
+
+      if (phraseCount === 4) {
+        phraseEl.style.display = "none";
+        imageEl.src = vibes[imageIndex].img;
+        phraseEl.textContent = vibes[imageIndex].text;
+        imageEl.style.display = "block";
+        phraseEl.style.display = "block";
+
+        imageIndex = (imageIndex + 1) % vibes.length;
+        phraseCount = 0;
+        return;
+      }
+
+      imageEl.style.display = "none";
+      phraseEl.textContent = phrases[phraseIndex];
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+      phraseCount++;
+    }
+  </script>
 
 </body>
 </html>
